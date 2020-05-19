@@ -1,0 +1,7 @@
+databases:
+  redis:
+    cache:
+      host: 172.20.0.5
+      port: 6379
+      password:
+      prefix:

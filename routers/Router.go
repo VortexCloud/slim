@@ -5,7 +5,7 @@ import (
 	"slim/controllers"
 )
 
-func WebRouter(engine *gin.Engine) {
+func Router(engine *gin.Engine) {
 	engine.GET("/test", controllers.Test)
 	engine.GET("/ping", func(context *gin.Context) {
 		context.JSON(200, gin.H{
