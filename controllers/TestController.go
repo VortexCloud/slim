@@ -2,9 +2,14 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-func Test(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{"code": 0, "msg": "no value", "data": "HelloWorld!!!"})
+var TestCtr TestController
+
+type TestController struct {
+	BaseController
+}
+
+func (tCtr TestController) Test(ctx *gin.Context) {
+	tCtr.SuccessResponse(ctx, "")
 }

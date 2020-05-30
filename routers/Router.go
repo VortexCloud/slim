@@ -6,7 +6,7 @@ import (
 )
 
 func Router(engine *gin.Engine) {
-	engine.GET("/test", controllers.Test)
+	engine.GET("/test", controllers.TestCtr.Test)
 	engine.GET("/ping", func(context *gin.Context) {
 		context.JSON(200, gin.H{
 			"message": "success",
