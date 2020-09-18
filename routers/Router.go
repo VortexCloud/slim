@@ -2,14 +2,22 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"slim/controllers"
+	"slim/app/controllers"
 )
 
-func Router(engine *gin.Engine) {
-	engine.GET("/test", controllers.TestCtr.Test)
+func SetRouter(engine *gin.Engine) {
 	engine.GET("/ping", func(context *gin.Context) {
 		context.JSON(200, gin.H{
-			"message": "success",
+			"message": "pong",
 		})
 	})
+	engine.GET("/test", controllers.TestCtr.Test)
+
+	v1 := engine.Group("v1")
+	{
+		user := v1.Group("user")
+		{
+			user.GET("/index", controllers.TestCtr.UserList)
+		}
+	}
 }

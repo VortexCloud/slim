@@ -2,17 +2,16 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"slim/databases"
+	"slim/app/libs"
 	"slim/routers"
 )
 
 func main() {
 	var err error
 
-	err = databases.MysqlInstance()
-
+	libs.ConnectMySQL()
 	r := gin.Default()
-	routers.Router(r)
+	routers.SetRouter(r)
 	err = r.Run()
 	if err != nil {
 		panic(err)

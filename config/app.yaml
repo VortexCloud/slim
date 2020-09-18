@@ -1,0 +1,49 @@
+
+---
+#文件名:   app.yaml
+#内容:     主配置文件，业务相关配置
+#是否必须:  是
+
+#服务描述相关
+service:
+  name: slim-go #[MUST]服务名，需要保障唯一，pre/prd环境必须采用ops项目id
+  environment: dev  #[dev, qa, pre, prd]
+  #version: v0.0.1 #服务版本号，默认是v0.0.1
+
+#监听协议相关
+bifrost:
+  protocols: #[rest, grpc, rest-xxx, grpc-xxx]
+    rest: #监听某个端口，提供restful服务
+      listenAddress: "0.0.0.0:8080" #[MUST]监听地址，如果监听本机所有ip，则ip采用0.0.0.0
+
+gorm:
+  bifrost:
+    dsn: root:@tcp(172.20.1.5:3306)/demo?charset=utf8&parseTime=True&loc=Local
+    read_timeout: 3000  # millisecond
+    write_timeout: 5000 # millisecond
+    max_open_conns: 128
+    max_idle_conns: 16
+    max_life_conns: 300 # second
+    debug_sql: false
+
+#mysql
+model:
+  driver: mysql
+  table_name: demo
+  dsn: root:@tcp(172.20.1.5:3306)/demo?charset=utf8&parseTime=True&loc=Local
+  max_open_conns: 20
+  max_idle_conns: 10
+  max_life_conns: 60
+  trace_include_not_found: false
+  #interpolateParams: false 预处理
+
+redis:
+  local_cache:
+    addr: 172.20.1.3:6379
+    password: "" # password 没有则不填
+    database: 0 # redis 数据库 index, 如：2, 默认 0
+    max_retries: 3 # 最大重试次数, 默认不重试
+    read_timeout: 1500 # 取数据最大等待时长, 单位：毫秒, 默认3秒, -1代表不超时
+    write_timeout: 1500 # 写数据最大等待时长, 单位：毫秒, 默认等于 read_timeout
+    pool_size: 20 # 最大 socket 连接数, 默认每核对应10个连接, 核的数量通过 runtime.NumCPU 获取
+    min_idle_conns: 10 # 最小空闲连接数
