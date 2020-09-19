@@ -17,7 +17,7 @@ func ConnectMySQL() *sql.DB {
 	if err != nil {
 		panic(err.Error())
 	}
-	defer db.Close()
+	//defer db.Close()
 
 	//设置数据库最大连接数
 	db.SetConnMaxLifetime(100)

@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"slim/app/libs"
+	"slim/app/models"
 )
 
 type TestService struct{}
@@ -20,7 +21,7 @@ func (s TestService) GetValue() string {
 }
 
 func (s TestService) GetUserList() interface{} {
-	//user := &models.User{}
-
-	return ""
+	user := &models.User{}
+	data := user.GetUserList()
+	return data
 }
