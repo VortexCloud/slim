@@ -5,10 +5,12 @@ import (
 	"slim/app/models"
 )
 
+const DBIndex int = 0
+
 type TestService struct{}
 
 func (s TestService) GetValue() string {
-	redis := libs.GetRedisInstance(1)
+	redis := libs.GetRedisInstance(DBIndex)
 	val, err := redis.Get("golang").Result()
 	if err != nil {
 		return err.Error()

@@ -11,13 +11,18 @@ func SetRouter(engine *gin.Engine) {
 			"message": "pong",
 		})
 	})
-	engine.GET("/test", controllers.TestCtr.Test)
 
-	v1 := engine.Group("v1")
+	engine.GET("/hello", controllers.HelloCtr.Hello)
+
+	api := engine.Group("api")
 	{
-		user := v1.Group("user")
+		v1 := api.Group("v1")
 		{
-			user.GET("/index", controllers.TestCtr.UserList)
+			user := v1.Group("user")
+			{
+				user.GET("/index", controllers.TestCtr.UserList)
+			}
 		}
 	}
+
 }

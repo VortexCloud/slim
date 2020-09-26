@@ -11,14 +11,7 @@ type TestController struct {
 	BaseController
 }
 
-func (tCtr TestController) Test(ctx *gin.Context) {
-	testService := &services.TestService{}
-	result := testService.GetValue()
-	tCtr.SuccessResponse(ctx, result)
-}
-
 func (tCtr TestController) UserList(ctx *gin.Context) {
-	testService := &services.TestService{}
-	result := testService.GetUserList()
+	result := services.TestService{}.GetUserList()
 	tCtr.SuccessResponse(ctx, result)
 }
