@@ -6,13 +6,14 @@ import (
 )
 
 func SetRouter(engine *gin.Engine) {
+
 	engine.GET("/ping", func(context *gin.Context) {
 		context.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
 
-	engine.GET("/hello", controllers.HelloCtr.Hello)
+	engine.GET("/hello", controllers.HelloController{}.Hello)
 
 	api := engine.Group("api")
 	{
