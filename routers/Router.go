@@ -21,7 +21,7 @@ func SetRouter(engine *gin.Engine) {
 		{
 			user := v1.Group("user")
 			{
-				user.GET("/index", controllers.TestCtr.UserList)
+				user.GET("/index", controllers.UserCtr.UserList)
 			}
 		}
 	}
