@@ -1,24 +1,25 @@
 package libs
 
-import "github.com/go-redis/redis/v8"
+import (
+	"github.com/go-redis/redis"
+	"sync"
+)
 
-func GetInstance(db int) *redis.Client {
-	client := redis.NewClient(&redis.Options{
-		Addr:     "172.20.1.3:6379",
-		Password: "",
-		DB:       db,
-	})
-	return client
+var (
+	RedisClientInstance *redis.Client
+	redisOnce           sync.Once
+)
+
+func GetRedisInstance(db int) *redis.Client {
+	if RedisClientInstance == nil {
+		redisOnce.Do(func() {
+			RedisClientInstance = redis.NewClient(&redis.Options{
+				Addr:       "172.20.1.3:6379", //os.Getenv("REDIS_HOST")
+				Password:   "",
+				MaxRetries: 3,
+			})
+		})
+	}
+	RedisClientInstance.Do("select", db)
+	return RedisClientInstance
 }
-
-//var ctx = context.Background()
-//
-//func ExampleNewClient()  {
-//	rdb := redis.NewClient(&redis.Options{
-//		Addr: "172.20.1.3:6379",
-//		Password: "",
-//		DB: 0,
-//	})
-//	pong,err := rdb.Ping(ctx).Result()
-//	fmt.Println(pong,err)
-//}

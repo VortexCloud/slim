@@ -1,8 +1,6 @@
 package services
 
 import (
-	"context"
-	"log"
 	"slim/app/libs"
 	"slim/app/models"
 )
@@ -10,13 +8,11 @@ import (
 type TestService struct{}
 
 func (s TestService) GetValue() string {
-	redis := libs.GetInstance(0)
-	val, err := redis.Get(context.Background(), "golang").Result()
+	redis := libs.GetRedisInstance(1)
+	val, err := redis.Get("golang").Result()
 	if err != nil {
-		log.Println("redis获取数据失败")
-		panic(err)
+		return err.Error()
 	}
-	log.Println("redis获取数据成功")
 	return val
 }
 
