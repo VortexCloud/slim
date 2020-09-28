@@ -7,9 +7,9 @@ import (
 
 const DBIndex int = 0
 
-type TestService struct{}
+type UserService struct{}
 
-func (s TestService) GetValue() string {
+func (userService UserService) GetValue() string {
 	redis := libs.GetRedisInstance(DBIndex)
 	val, err := redis.Get("golang").Result()
 	if err != nil {
@@ -18,8 +18,14 @@ func (s TestService) GetValue() string {
 	return val
 }
 
-func (s TestService) GetUserList() interface{} {
+func (userService UserService) GetUserList() interface{} {
 	user := &models.User{}
 	data := user.GetUserList()
 	return data
+}
+
+func (userService UserService) CreateUser(email string, password string) bool {
+	user := models.User{}
+	rst := user.CreateUser(email, password)
+	return rst
 }

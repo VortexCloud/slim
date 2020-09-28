@@ -6,17 +6,18 @@ import (
 )
 
 type User struct {
-	ID     int    `json:"id" form:"id"`
-	Name   string `json:"name"`
-	Email  string `json:"email"`
-	Active int    `json:"active"`
+	ID       int    `json:"id" form:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	Active   int    `json:"active"`
 }
 
 func (user User) GetUserList() interface{} {
 	users := make([]User, 0)
 	//users := make([]User, 0)
-	DB := libs.ConnectMySQL()
-	rows, err := DB.Query("select `id`,`name`,`email`,`active` from `user`")
+	db := libs.ConnectMySQL()
+	rows, err := db.Query("select `id`,`name`,`email`,`active` from `user`")
 
 	if err != nil {
 		fmt.Println(err)
@@ -33,4 +34,20 @@ func (user User) GetUserList() interface{} {
 	}
 	return users
 	//fmt.Println(users)
+}
+
+func (user User) CreateUser(email string, password string) bool {
+	db := libs.ConnectMySQL()
+	stmt, err := db.Prepare("INSERT `user` SET email=?,password=?")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	res, err := stmt.Exec(email, password)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	fmt.Println(res)
+
+	return true
 }
