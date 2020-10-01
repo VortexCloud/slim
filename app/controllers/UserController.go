@@ -15,11 +15,12 @@ type UserController struct {
 }
 
 func (userCtr UserController) UserCreate(ctx *gin.Context) {
+	name := ctx.DefaultPostForm("name", "")
 	email := ctx.DefaultPostForm("email", "")
 	password := ctx.DefaultPostForm("password", "")
 	//passwordMd5 := md5.Sum([]byte(password))
 	userService := services.UserService{}
-	result := userService.CreateUser(email, password)
+	result := userService.CreateUser(name, email, password)
 	fmt.Printf("email: %s; password: %s;", email, password)
 	userCtr.SuccessResponse(ctx, result)
 }

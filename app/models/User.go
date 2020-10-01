@@ -9,7 +9,7 @@ type User struct {
 	ID       int    `json:"id" form:"id"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
-	Password string `json:"password"`
+	Password string `json:"-" `
 	Active   int    `json:"active"`
 }
 
@@ -36,13 +36,13 @@ func (user User) GetUserList() interface{} {
 	//fmt.Println(users)
 }
 
-func (user User) CreateUser(email string, password string) bool {
+func (user User) CreateUser(name string, email string, password string) bool {
 	db := libs.ConnectMySQL()
-	stmt, err := db.Prepare("INSERT `user` SET email=?,password=?")
+	stmt, err := db.Prepare("INSERT `user` SET name=?, email=?, password=?")
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	res, err := stmt.Exec(email, password)
+	res, err := stmt.Exec(name, email, password)
 	if err != nil {
 		fmt.Println(err.Error())
 	}

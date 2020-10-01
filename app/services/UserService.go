@@ -24,8 +24,8 @@ func (userService UserService) GetUserList() interface{} {
 	return data
 }
 
-func (userService UserService) CreateUser(email string, password string) bool {
+func (userService UserService) CreateUser(name string, email string, password string) bool {
 	user := models.User{}
-	rst := user.CreateUser(email, password)
+	rst := user.CreateUser(name, email, password)
 	return rst
 }
