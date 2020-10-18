@@ -8,9 +8,7 @@ import (
 func SetRouter(engine *gin.Engine) {
 
 	engine.GET("/ping", func(context *gin.Context) {
-		context.JSON(200, gin.H{
-			"message": "pong",
-		})
+		context.String(200, "pong")
 	})
 
 	engine.GET("/hello", controllers.HelloController{}.Hello)
