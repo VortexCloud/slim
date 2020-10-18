@@ -6,11 +6,11 @@ import (
 )
 
 type User struct {
-	ID       int    `json:"id" form:"id"`
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"-" `
-	Active   int    `json:"active"`
+	ID       int    `form:"id" json:"id"`
+	Name     string `form:"name" json:"name"`
+	Email    string `form:"email" json:"email"`
+	Password string `form:"password" json:"-" `
+	Active   int    `form:"active" json:"active"`
 }
 
 func (user User) GetUserList() interface{} {
