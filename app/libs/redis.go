@@ -14,7 +14,7 @@ func GetRedisInstance(db int) *redis.Client {
 	if RedisClientInstance == nil {
 		redisOnce.Do(func() {
 			RedisClientInstance = redis.NewClient(&redis.Options{
-				Addr:       "172.20.1.3:6379", //os.Getenv("REDIS_HOST")
+				Addr:       "redis:6379", //os.Getenv("REDIS_HOST")
 				Password:   "",
 				MaxRetries: 3,
 			})

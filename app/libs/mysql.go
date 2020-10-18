@@ -12,7 +12,7 @@ type MySQLConfig struct {
 
 func ConnectMySQL() *sql.DB {
 	DriverName := "mysql"
-	Dsn := "root:secret@tcp(172.20.1.5:3306)/demo?charset=utf8&parseTime=True&loc=Local"
+	Dsn := "root:secret@tcp(mysql:3306)/demo?charset=utf8&parseTime=True&loc=Local"
 	db, err := sql.Open(DriverName, Dsn)
 	if err != nil {
 		panic(err.Error())
