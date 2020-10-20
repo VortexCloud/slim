@@ -55,6 +55,7 @@ func main() {
 		c.JSON(200, gin.H{"hello": "world"})
 	})
 
+	//autotls.Run(route,"")
 	route.Run(":8080")
 
 	//server02 := &http.Server{
