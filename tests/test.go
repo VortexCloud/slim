@@ -56,4 +56,28 @@ func main() {
 	})
 
 	route.Run(":8080")
+
+	//server02 := &http.Server{
+	//	Addr: ":8081",
+	//	Handler: router02(),
+	//	ReadHeaderTimeout: 5 * time.Second,
+	//	WriteTimeout: 10 * time.Second,
+	//}
+	//server02.ListenAndServe()
+}
+
+func router02() http.Handler {
+	e := gin.New()
+	e.Use(gin.Recovery())
+	e.GET("/", func(c *gin.Context) {
+		c.JSON(
+			http.StatusOK,
+			gin.H{
+				"code":  http.StatusOK,
+				"error": "Welcome server 02",
+			},
+		)
+	})
+
+	return e
 }
