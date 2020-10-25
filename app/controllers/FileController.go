@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 )
 
@@ -30,4 +32,13 @@ func (fileCtr FileController) DownLoadFile(ctx *gin.Context) {
 
 	ctx.DataFromReader(http.StatusOK, contentLength, contentType, reader, extraHeaders)
 	//fileCtr.SuccessResponse(ctx,"")
+}
+
+func (fileCtr FileController) UploadedFile(ctx *gin.Context) {
+	file, _ := ctx.FormFile("file")
+	log.Println(file.Filename)
+
+	// Upload the file to specific dst.
+	// ctx.SaveUploadedFile(file, dst)
+	fileCtr.SuccessResponse(ctx, fmt.Sprintf("'%s' uploaded!", file.Filename))
 }

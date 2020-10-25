@@ -24,6 +24,7 @@ func SetRouter(engine *gin.Engine) {
 			}
 
 			v1.GET("/download_file", controllers.FileCtr.DownLoadFile)
+			v1.GET("/uploaded_file", controllers.FileCtr.UploadedFile)
 		}
 	}
 
