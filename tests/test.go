@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
@@ -55,8 +56,8 @@ func main() {
 		c.JSON(200, gin.H{"hello": "world"})
 	})
 
-	//autotls.Run(route,"")
-	route.Run(":8080")
+	autotls.Run(route, "example.test")
+	//route.Run(":8080")
 
 	//server02 := &http.Server{
 	//	Addr: ":8081",
