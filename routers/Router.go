@@ -22,6 +22,8 @@ func SetRouter(engine *gin.Engine) {
 				user.GET("/index", controllers.UserCtr.UserList)
 				user.POST("/create", controllers.UserCtr.UserCreate)
 			}
+
+			v1.GET("/download_file", controllers.FileCtr.DownLoadFile)
 		}
 	}
 
