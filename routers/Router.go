@@ -17,6 +17,7 @@ func SetRouter(engine *gin.Engine) {
 	{
 		v1 := api.Group("v1")
 		{
+			//user := v1.Group("user",gin.BasicAuth(gin.Accounts{}))
 			user := v1.Group("user")
 			{
 				user.GET("/index", controllers.UserCtr.UserList)
