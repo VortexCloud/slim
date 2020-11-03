@@ -3,6 +3,18 @@ package main
 import "fmt"
 
 func main() {
+
+	arr := [...]int{1, 2, 3, 4, 5, 6}
+	fmt.Println(arr)
+
+	for i := 0; i < len(arr); i++ {
+		fmt.Println(arr[i])
+	}
+
+	for i, v := range arr {
+		fmt.Println(i, v)
+	}
+
 	var multi [9][9]string
 
 	for j := 0; j < 9; j++ {
