@@ -15,6 +15,10 @@ func SetRouter(engine *gin.Engine) {
 
 	api := engine.Group("api")
 	{
+		demo := api.Group("demo")
+		{
+			demo.GET("ding_talk", controllers.DemoCtr.DingTalkAlarmTest)
+		}
 		v1 := api.Group("v1")
 		{
 			//user := v1.Group("user",gin.BasicAuth(gin.Accounts{}))
